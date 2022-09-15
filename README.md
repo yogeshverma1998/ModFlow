@@ -9,6 +9,7 @@
 
 # Continuous Normalizing Flows
 Normalizing flow have seen widespread use for density modeling, generative modeling , etc which provides a general way of constructing flexible probability distributions. It is defined by a parameterized invertible deterministic transformation from a base distribution $\mathcal{Z}$ (e.g., Gaussian distribution) to real-world observational space $X$ (e.g. images and speech). The $f: \mathcal{Z} \mapsto X$ is an invertible transformation, then we can compute the density function of real-world data $\mathbf{x}$, i.e., $p_X(\mathbf{x})$, via the change-of-variables formula:
+
 <p align="center">
 $$p_X(\mathbf{x}) = p_{\mathcal{Z}}\big(f_{\theta}^{-1}(\mathbf{x}) \big) \left| \det \frac{\partial f_{\theta}^{-1}(\mathbf{x})}{\partial \mathbf{x}} \right|$$
  </p>   
