@@ -15,9 +15,7 @@ $$p_X(\mathbf{x}) = p_{\mathcal{Z}}\big(f_{\theta}^{-1}(\mathbf{x}) \big) \left|
  </p>   
 Given a datapoint $$\mathbf{x}$$, the exact density $$p_X(\mathbf{x})$$ can be computed via inverting the flow by function $$f$$, $$\mathbf{z} = f^{-1}(\mathbf{x})$$. Moreover, $$\mathbf{x}$$ can be sampled from $$p_X(\mathbf{x})$$ by first sampling $$\mathbf{z} \sim p_\mathcal{Z}(\mathbf{z})$$ and then performing the feedforward transformation $$\mathbf{x} = f_{\theta}(\mathbf{z})$$. 
 
-<p align="center">
-   ![title](/nf_website.png)
-</p> 
+![title](/Modular-Flows-Differential-Molecular-Generation/nf_website.png)
 
 There exists a continous analog of above equation which replaces the warping function with an integral of continous-time dynamics. The process starts by sampling from a base distribution $$\mathbf{z}_0 \sim p_0(\mathbf{z}_0)$$. Then, we solve the initial value problem $$\mathbf{z}(t_0) = \mathbf{z}_0$$, $$\dot{\mathbf{z}}(t) = \frac{\partial \mathbf{z}(t)}{\partial t} = f(\mathbf{z}(t),t;\theta)$$, where ODE is defined by the parametric function $$f(\mathbf{z}(t),t;\theta)$$ to obtain $$\mathbf{z}(t_1)$$ which constitutes our observable data. These models are called Continous Normalizing Flows (CNF). Then, using the *instantaneous change of variables* formula change in log-density under this model is given as:
 <p align="center">
