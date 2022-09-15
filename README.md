@@ -17,15 +17,16 @@ Given a datapoint $$\mathbf{x}$$, the exact density $$p_X(\mathbf{x})$$ can be c
 
 ![title](/Modular-Flows-Differential-Molecular-Generation/nf_website.png)
 
-||--|| 6,4
-
-###
+[column
 There exists a continous analog of above equation which replaces the  warping function with an integral of continous-time dynamics. The process starts by sampling from a base distribution $$\mathbf{z}_0 \sim p_0(\mathbf{z}_0)$$. Then, we solve the initial value problem $$\mathbf{z}(t_0) = \mathbf{z}_0$$, $$\dot{\mathbf{z}}(t) = \frac{\partial \mathbf{z}(t)}{\partial t} = f(\mathbf{z}(t),t;\theta)$$, where ODE is defined by the parametric function $$f(\mathbf{z}(t),t;\theta)$$ to obtain $$\mathbf{z}(t_1)$$ which constitutes our observable data. These models are called Continous Normalizing Flows (CNF). Then, using the *instantaneous change of variables* formula change in log-density under this model is given as:
 
-###
+]
+
+[column
 There exists a continous analog of above equation which replaces the  warping function with an integral of continous-time dynamics. The process starts by sampling from a base distribution $$\mathbf{z}_0 \sim p_0(\mathbf{z}_0)$$. Then, we solve the initial value problem $$\mathbf{z}(t_0) = \mathbf{z}_0$$, $$\dot{\mathbf{z}}(t) = \frac{\partial \mathbf{z}(t)}{\partial t} = f(\mathbf{z}(t),t;\theta)$$, where ODE is defined by the parametric function $$f(\mathbf{z}(t),t;\theta)$$ to obtain $$\mathbf{z}(t_1)$$ which constitutes our observable data. These models are called Continous Normalizing Flows (CNF). Then, using the *instantaneous change of variables* formula change in log-density under this model is given as:
 
-||--||
+]
+
 
 There exists a continous analog of above equation which replaces the  warping function with an integral of continous-time dynamics. The process starts by sampling from a base distribution $$\mathbf{z}_0 \sim p_0(\mathbf{z}_0)$$. Then, we solve the initial value problem $$\mathbf{z}(t_0) = \mathbf{z}_0$$, $$\dot{\mathbf{z}}(t) = \frac{\partial \mathbf{z}(t)}{\partial t} = f(\mathbf{z}(t),t;\theta)$$, where ODE is defined by the parametric function $$f(\mathbf{z}(t),t;\theta)$$ to obtain $$\mathbf{z}(t_1)$$ which constitutes our observable data. These models are called Continous Normalizing Flows (CNF). Then, using the *instantaneous change of variables* formula change in log-density under this model is given as:
 
