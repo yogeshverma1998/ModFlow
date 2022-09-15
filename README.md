@@ -35,7 +35,7 @@ Given a datapoint $$\mathbf{x}$$, we can compute both the point $$\mathbf{z}_{0}
 
 # Modular Flows
 
-
+![title](/Modular-Flows-Differential-Molecular-Generation/workflow_final.png)
 
 # Results
 
