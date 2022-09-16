@@ -111,7 +111,7 @@ We trained the model on QM9[8] and ZINC250K[9] dataset, where molecules are in k
   <img src="https://raw.githubusercontent.com/yogeshverma1998/Modular-Flows-Differential-Molecular-Generation/main/result_gen_combined.png" />
 </p>
 
-Some of the generated molecules via $$\texttt{ModFlow}$$ are also shown above. We visually evaluate the generated structures via out method via properties distribution. We utilize kernel density estimation of these distributions to visualize these distributions. We use
+Some of the generated molecules via **$$\texttt{ModFlow}$$** are also shown above. We visually evaluate the generated structures via out method via properties distribution. We utilize kernel density estimation of these distributions to visualize these distributions. We use
 
 - **Molecular Weight**: Sum of the individual atomic weights of a molecule.
 - **LogP**: Ratio of concentration in octanol-phase to aqueous phase, also known as the octanol-water partition coefficient.
@@ -127,7 +127,7 @@ Some of the generated molecules via $$\texttt{ModFlow}$$ are also shown above. W
 
 
 ## Ablation Studies
-We performed ablation experiments to gain further insights about $$\texttt{ModFlow}$$. Specifically, we conducted ablation study to quantify the effect of incorporating the symmetries in our model as **E(3) Equivariant vs Not Equivariant**, where we compare the results to a 3-layer GCN and investigated whether including 3D coordinate information **2D vs 3D**, improves the model and evaluate the benefit of including the geometric information. 
+We performed ablation experiments to gain further insights about **$$\texttt{ModFlow}$$**. Specifically, we conducted ablation study to quantify the effect of incorporating the symmetries in our model as **E(3) Equivariant vs Not Equivariant**, where we compare the results to a 3-layer GCN and investigated whether including 3D coordinate information **2D vs 3D**, improves the model and evaluate the benefit of including the geometric information. 
 <p align="center">
   <img src="https://raw.githubusercontent.com/yogeshverma1998/Modular-Flows-Differential-Molecular-Generation/main/ablation_final_combined.png" />
 </p>
