@@ -37,7 +37,7 @@ We represent molecule as a graph $$G = (V,E)$$, where each vertex takes value fr
     $$p(G) := p(V | E,\{ z\}) = \prod_{i=1}^M \texttt{Cat}(v_i | \sigma(\mathbf{z}_i))$$
 </p> 
 
-We obtained an alternative representation by decomposing a molecule into a tree like structure, by contracting certain vertices into a single node such that the molecular graph $$G$$ becomes acyclic. We followed a similar decompositon as JT-VAE[7], but restrict these clusters to ring-substructures, in addition to the atom alphabet. Thus, we obtain an extended alphabet vocabulary as $$\mathcal{A}_{\mathrm{tree}} = \{ \texttt{C},\texttt{H},\texttt{N}, \ldots,  \texttt{C}_{1},\texttt{C}_{2},\ldots \}$$, where each cluster label $$\texttt{C}_{r}$$ corresponds to the some ring-substructure in the label vocabulary $$\chi$$
+We can obtain an alternative representation by decomposing a moleculer graph into a tree, by contracting certain vertices into a single node such that the molecular graph $$G$$ becomes acyclic. We followed a similar decompositon as JT-VAE[7], but restrict these clusters to ring-substructures, in addition to the atom alphabet. Thus, we obtain an extended alphabet vocabulary as $$\mathcal{A}_{\mathrm{tree}} = \{ \texttt{C},\texttt{H},\texttt{N}, \ldots,  \texttt{C}_{1},\texttt{C}_{2},\ldots \}$$, where each cluster label $$\texttt{C}_{r}$$ corresponds to the some ring-substructure in the label vocabulary $$\chi$$
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/yogeshverma1998/Modular-Flows-Differential-Molecular-Generation/main/junction_mod.png" />
@@ -59,7 +59,11 @@ where $$\mathcal{N}_{i} = \{ \mathbf{z}_{j} : (i,j) \in E \}$$ is the set of nei
  $$\dot{\mathbf{z}}_{i}(t) = \begin{pmatrix} \dot{\mathbf{z}}_{i}(t)_1(t) \\ \vdots \\ \dot{\mathbf{z}}_{i}(t)_M(t) \end{pmatrix} = \begin{pmatrix} f_\theta\big( t, \mathbf{z}_1(t), \mathbf{z}_{\mathcal{N}_1}(t) \big) \\ \vdots \\ f_\theta\big( t, \mathbf{z}_M(t), \mathbf{z}_{\mathcal{N}_M}(t) \big) \end{pmatrix} $$
  </p>
 ## Equivariant local differential
+The goal is to have a function $$f_{\theta}$$ such that it satisfies natural equivariances and invariances of molecules like translation, rotational, reflection equivariances. Therefore, we chose to use E(3)-Equivariant GNN (EGNN)[11] which satisfies all the above criteria.
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/yogeshverma1998/Modular-Flows-Differential-Molecular-Generation/main/mol_sym.png" />
+</p> 
 ## Training Objective
 
 We reduce the learning problem to maximizing the score cross-entropy $$\mathrm{E}_{\hat{p}_{\mathrm{data}}(\mathbf{z}(T))}[\log p_\theta(\mathbf{z}(T))]$$, where we turn the observed set of graphs $$\{G_{n}\}$$ into a set of scores $$\{\mathbf{z}_{n}\}$$ by using one-hot encoding 
@@ -89,7 +93,7 @@ We generate novel molecules by sampling an initial state $$\mathbf{z}(0) \sim \m
 # Results
 ## Density Estimation
 
-We demonstrated the power of our method on learning highly discontinous patterns on 2D grid graphs. We considered patterns corresponding to two-variants of chess-board pattern as $$4 \times 4$$, where every node has opposite value to its neighbors and $$16 \times 16$$ grid where blocks of $$4 \times 4$$ nodes have uniform values, but opposite across blocks. At last, we also considered alternate stripes pattern over $$20 \times 20$$.
+We demonstrated the power of our method on learning highly discontinous patterns on 2D grid graphs. We considered patterns corresponding to two-variants of chess-board pattern as $$4 \times 4$$, where every node has opposite value to its neighbors and $$16 \times 16$$ grid where blocks of $$4 \times 4$$ nodes have uniform values, but opposite across blocks. At last, we also considered alternate stripes pattern over $$20 \times 20$$ grid.
 <p align="center">
   <img src="https://raw.githubusercontent.com/yogeshverma1998/Modular-Flows-Differential-Molecular-Generation/main/toy_final.png" width="600" height="300" />
 </p>
