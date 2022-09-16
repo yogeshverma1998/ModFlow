@@ -53,10 +53,7 @@ We represent molecule as a graph $$G = (V,E)$$, where each vertex takes value fr
     $$p(G) := p(V | E,\{ z\}) = \prod_{i=1}^M \texttt{Cat}(v_i | \sigma(\mathbf{z}_i))$$
   </p> 
 
-We can also obtain an alternative representation by decomposing a molecule into a tree like structure, by contracting certain vertices into a single node such that the molecular graph $$G$$ becomes acyclic. We followed a similar decompositon as JT-VAE[7], where we restrict these clusters to ring-substructures present in the molecular data, in addition to the atom alphabet. Thus, we obtain an extended alphabet vocabulary 
-as $$\mathcal{A}_{\mathrm{tree}} = \{ \texttt{C},\texttt{H},\texttt{N}, \ldots,  \texttt{C}_{1},\texttt{C}_{2},\ldots \}$$, 
-
-where each cluster label $\texttt{C}_{r}$ corresponds to the some ring-substructure in the label vocabulary $$\irchi$$.
+We can also obtain an alternative representation by decomposing a molecule into a tree like structure, by contracting certain vertices into a single node such that the molecular graph $$G$$ becomes acyclic. We followed a similar decompositon as JT-VAE[7], where we restrict these clusters to ring-substructures present in the molecular data, in addition to the atom alphabet. Thus, we obtain an extended alphabet vocabulary as $$\mathcal{A}_{\mathrm{tree}} = \{ \texttt{C},\texttt{H},\texttt{N}, \ldots,  \texttt{C}_{1},\texttt{C}_{2},\ldots \}$$, where each cluster label $\texttt{C}_{r}$ corresponds to the some ring-substructure in the label vocabulary $$\chi$$.
 
 ![title](/Modular-Flows-Differential-Molecular-Generation/junction_mod.png)
 
@@ -87,9 +84,9 @@ where
 
 We exploit the non-reversible composition of the argmax and softmax to transition from continous space to discrete graph space, but short-circuit in reverse direction. This indeed allows to keep the forward and backward flows aligned.
 
-<p align="center">
+
 ![title](/Modular-Flows-Differential-Molecular-Generation/tikz_diagram.png)
- </p>
+
 We thus maximize an objective over $N$ training graphs, 
 
 
