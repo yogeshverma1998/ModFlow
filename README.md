@@ -86,7 +86,7 @@ We generate novel molecules by sampling an initial state $$\mathbf{z}(0) \sim \m
 # Results
 ## Density Estimation
 
-We demonstrated the power of our method on learning highly discontinous patterns on 2D grid graphs. 
+We demonstrated the power of our method on learning highly discontinous patterns on 2D grid graphs. We considered patterns corresponding to two-variants of chess-board pattern as $$4 \times 4$$, where every node has opposite value to its neighbors and $$16 \times 16$$ grid where blocks of $$4 \times 4$$ nodes have uniform values, but opposite across blocks. At last, we also considered alternate stripes pattern over $$20 \times 20$$.
 <p align="center">
   <img src="https://raw.githubusercontent.com/yogeshverma1998/Modular-Flows-Differential-Molecular-Generation/main/toy_final.png" />
 </p>
