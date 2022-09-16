@@ -72,11 +72,11 @@ We exploit the non-reversible composition of the argmax and softmax to transitio
 <p align="center">
   <img src="https://raw.githubusercontent.com/yogeshverma1998/Modular-Flows-Differential-Molecular-Generation/main/tikz_diagram.png" />
 </p>
-We thus maximize an objective over $N$ training graphs, 
+We thus maximize an objective over $$N$$ training graphs, 
 
-<!--<p align="center">
+<p align="center">
 $$\texttt{argmax}_\theta \qquad \mathcal{L} = \mathcal{E}_{\hat{p}_{\mathrm{data}}(\mathbf{z})} \log p_\theta(\mathbf{z}) \approx \frac{1}{N} \sum_{n=1}^N \log p_T\big( \mathbf{z}(T) = \mathbf{z}_n \big)$$     
-</p>-->  
+</p>  
 
 ## Molecule Generation
 
@@ -128,6 +128,10 @@ We performed ablation experiments to gain further insights about $$\texttt{ModFl
   <img src="https://raw.githubusercontent.com/yogeshverma1998/Modular-Flows-Differential-Molecular-Generation/main/ablation_final_combined.png" />
 </p>
 
+# Conclusion
+> 1. 
+> 2. 
+> 3. 
 
 # References
 
