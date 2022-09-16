@@ -149,6 +149,7 @@ We performed ablation experiments to gain further insights about $$\texttt{ModFl
   <li>Greg Landrum et al. Rdkit: A software suite for cheminformatics, computational chemistry, and predictive modeling, 2013</li>
   <li> Valerii Iakovlev, Markus Heinonen, and Harri Lähdesmäki. Learning continuous-time pdes from sparse data with graph neural networks.</li>
   <li> Ben Chamberlain, James Rowbottom, Maria I Gorinova, Michael Bronstein, Stefan Webb, and Emanuele Rossi Grand: Graph neural diffusion. In International Conference on Machine Learning, pages 1407–1418. PMLR, 2021</li>
+  <li>Victor Garcia Satorras, Emiel Hoogeboom, and Max Welling. E(n) equivariant graph neural networks, 2021</li>
 </ol>
 
 
