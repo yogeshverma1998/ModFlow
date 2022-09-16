@@ -90,8 +90,6 @@ We generate novel molecules by sampling an initial state $$\mathbf{z}(0) \sim \m
 </p>
 
 
-
-
 # References
 
 [1]
