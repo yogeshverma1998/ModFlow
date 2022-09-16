@@ -92,6 +92,22 @@ We generate novel molecules by sampling an initial state $$\mathbf{z}(0) \sim \m
 
 ## Molecular Experiments
 
+<table border="0">
+ <tr>
+    <td><b style="font-size:30px">Method</b></td>
+    <td><b style="font-size:30px">Validity</b></td>
+   <td><b style="font-size:30px">Uniqueness</b></td>
+   <td><b style="font-size:30px">Novelty</b></td>
+   <td><b style="font-size:30px">Reconstruction</b></td>
+ </tr>
+ <tr>
+    <td>1</td>
+    <td>2</td>
+ </tr>
+</table>
+
+
+
 | Method | Validity $$\%$$ | Uniqueness $$\%$$ | Novelty $$\%$$ | Reconstruction $$\%$$ |
 | ---------- | ------------- | -------- | ---------| ---------|
 
