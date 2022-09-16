@@ -50,7 +50,7 @@ Based on the general recipie of normalizing flows, we propose to model the node 
     $$\dot{\mathbf{z}}_{i}(t) := \frac{\partial \mathbf{z}_i(t)}{\partial t} = f_\theta\big( t, \mathbf{z}_i(t), \mathbf{z}_{\mathcal{N}_i}(t),\mathbf{x}_{i}, \mathbf{x}_{\mathcal{N}_i} \big), \qquad i = 1, \ldots, M$$
   </p> 
   
-where $$\mathcal{N}_{i} = \{ \mathbf{z}_{j} : (i,j) \in E \}$$ is the set of neighbor scores at time $$t$$, $$\mathbf{x}$$ is the spatial information (2D/3D), and $$\theta$$ are the parameters of the flow function $f$ to be learned. By collecting all node differentials we obtain a **modular** joint, coupled ODE, which is equivalent to a graph PDE [5,6], where the evolution of each node only depends on its immediate neighbors. 
+where $$\mathcal{N}_{i} = \{ \mathbf{z}_{j} : (i,j) \in E \}$$ is the set of neighbor scores at time $$t$$, $$\mathbf{x}$$ is the spatial information (2D/3D), and $$\theta$$ are the parameters of the flow function $$f$$ to be learned. By collecting all node differentials we obtain a **modular** joint, coupled ODE, which is equivalent to a graph PDE [5,6], where the evolution of each node only depends on its immediate neighbors. 
 
 <p align="center">
  $$\dot{\mathbf{z}}_{i}(t) = \begin{pmatrix} \dot{\mathbf{z}}_{i}(t)_1(t) \\ \vdots \\ \dot{\mathbf{z}}_{i}(t)_M(t) \end{pmatrix} = \begin{pmatrix} f_\theta\big( t, \mathbf{z}_1(t), \mathbf{z}_{\mathcal{N}_1}(t) \big) \\ \vdots \\ f_\theta\big( t, \mathbf{z}_M(t), \mathbf{z}_{\mathcal{N}_M}(t) \big) \end{pmatrix} $$
@@ -77,7 +77,7 @@ $$\texttt{argmax}_\theta \qquad \mathcal{L} = \mathcal{E}_{\hat{p}_{\mathrm{data
 
 ## Molecule Generation
 
-We generate novel molecules by sampling an initial state $$\mathbf{z}(0) \sim \mathcal{N}(0,I)$$ based on structure, and running the modular flow forward in time until $\mathbf{z}(T)$. This procedure maps a tractable base distribution $$p_0$$ to some more complex distribution $$p_T$$. We follow argmax to pick the most probable label assignment for each node.
+We generate novel molecules by sampling an initial state $$\mathbf{z}(0) \sim \mathcal{N}(0,I)$$ based on structure, and running the modular flow forward in time until $$\mathbf{z}(T)$$. This procedure maps a tractable base distribution $$p_0$$ to some more complex distribution $$p_T$$. We follow argmax to pick the most probable label assignment for each node.
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/yogeshverma1998/Modular-Flows-Differential-Molecular-Generation/main/workflow_final.png" />
@@ -91,92 +91,29 @@ We generate novel molecules by sampling an initial state $$\mathbf{z}(0) \sim \m
 
 
 ## Molecular Experiments
+We trained the model on QM9[8] and ZINC250K[9] dataset, where molecules are in kekulized form with hydrogens removed by the RDkit[10] software. We adopt common quality metrics to evaluate molecular generation as,
 
-<table border="0">
- <tr>
-    <td><b style="font-size:10px">Method</b></td>
-    <td><b style="font-size:10px">Validity</b></td>
-   <td><b style="font-size:10px">Uniqueness</b></td>
-   <td><b style="font-size:10px">Novelty</b></td>
-   <td><b style="font-size:10px">Reconstruction</b></td>
- </tr>
- <tr>
-    <td>GVAE</td>
-    <td>60.2</td>
-   <td>9.3</td>
-   <td>80.9</td>
-   <td>96.0</td>
- </tr>
-  <tr>
-    <td>GraphNVP</td>
-    <td>83.1</td>
-   <td>99.2</td>
-   <td>58.2</td>
-   <td>100</td>
- </tr>
-  <tr>
-    <td>GRF</td>
-    <td>84.5</td>
-   <td>66</td>
-   <td>58.6</td>
-   <td>100</td>
- </tr>
-  <tr>
-    <td>GraphAF</td>
-    <td>67</td>
-   <td>94.2</td>
-   <td>88.8</td>
-   <td>100</td>
- </tr>
-  <tr>
-    <td>GraphDF</td>
-    <td>82.7</td>
-   <td>97.6</td>
-   <td>98.1</td>
-   <td>100</td>
- </tr>
-  <tr>
-    <td>MoFlow</td>
-    <td>89.0</td>
-   <td>98.5</td>
-   <td>96.4</td>
-   <td>100</td>
- </tr>
-  <tr>
-    <td>ModFlow (2D)</td>
-    <td>89.0</td>
-   <td>98.5</td>
-   <td>96.4</td>
-   <td>100</td>
- </tr>
-  <tr>
-    <td>ModFlow (3D)</td>
-    <td>89.0</td>
-   <td>98.5</td>
-   <td>96.4</td>
-   <td>100</td>
- </tr>
-  <tr>
-    <td>ModFlow (JT-2D)</td>
-    <td>89.0</td>
-   <td>98.5</td>
-   <td>96.4</td>
-   <td>100</td>
- </tr>
-  <tr>
-    <td>ModFlow (JT-3D)</td>
-    <td>89.0</td>
-   <td>98.5</td>
-   <td>96.4</td>
-   <td>100</td>
- </tr>
-</table>
+- **Validity**: Fraction of molecules that satisfy chemical valency rule
+- **Uniqueness**: Fraction of non-duplicate generations
+- **Novelty**: Fraction of molecules not present in training data
+- **Reconstruction**: Fraction of molecules that can be reconstructed from their encoding
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/yogeshverma1998/Modular-Flows-Differential-Molecular-Generation/main/result_combined.png" />
+</p>
 
-| First Header  | Second Header |
-| ------------- | ------------- |
-| Content Cell  | Content Cell  |
-| Content Cell  | Content Cell  |
+We visually evaluate the generated structures via out method via properties distribution. We utilize kernel density estimation of these distributions to visualize these distributions. We use 
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/yogeshverma1998/Modular-Flows-Differential-Molecular-Generation/main/prop_dist_combined.png" />
+</p>
+
+## Ablation Studies
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/yogeshverma1998/Modular-Flows-Differential-Molecular-Generation/main/ablation_combined.png" />
+</p>
+
 
 # References
 
