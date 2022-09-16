@@ -94,22 +94,89 @@ We generate novel molecules by sampling an initial state $$\mathbf{z}(0) \sim \m
 
 <table border="0">
  <tr>
-    <td><b style="font-size:30px">Method</b></td>
-    <td><b style="font-size:30px">Validity</b></td>
-   <td><b style="font-size:30px">Uniqueness</b></td>
-   <td><b style="font-size:30px">Novelty</b></td>
-   <td><b style="font-size:30px">Reconstruction</b></td>
+    <td><b style="font-size:10px">Method</b></td>
+    <td><b style="font-size:10px">Validity</b></td>
+   <td><b style="font-size:10px">Uniqueness</b></td>
+   <td><b style="font-size:10px">Novelty</b></td>
+   <td><b style="font-size:10px">Reconstruction</b></td>
  </tr>
  <tr>
-    <td>1</td>
-    <td>2</td>
+    <td>GVAE</td>
+    <td>60.2</td>
+   <td>9.3</td>
+   <td>80.9</td>
+   <td>96.0</td>
+ </tr>
+  <tr>
+    <td>GraphNVP</td>
+    <td>83.1</td>
+   <td>99.2</td>
+   <td>58.2</td>
+   <td>100</td>
+ </tr>
+  <tr>
+    <td>GRF</td>
+    <td>84.5</td>
+   <td>66</td>
+   <td>58.6</td>
+   <td>100</td>
+ </tr>
+  <tr>
+    <td>GraphAF</td>
+    <td>67</td>
+   <td>94.2</td>
+   <td>88.8</td>
+   <td>100</td>
+ </tr>
+  <tr>
+    <td>GraphDF</td>
+    <td>82.7</td>
+   <td>97.6</td>
+   <td>98.1</td>
+   <td>100</td>
+ </tr>
+  <tr>
+    <td>MoFlow</td>
+    <td>89.0</td>
+   <td>98.5</td>
+   <td>96.4</td>
+   <td>100</td>
+ </tr>
+  <tr>
+    <td>ModFlow (2D)</td>
+    <td>89.0</td>
+   <td>98.5</td>
+   <td>96.4</td>
+   <td>100</td>
+ </tr>
+  <tr>
+    <td>ModFlow (3D)</td>
+    <td>89.0</td>
+   <td>98.5</td>
+   <td>96.4</td>
+   <td>100</td>
+ </tr>
+  <tr>
+    <td>ModFlow (JT-2D)</td>
+    <td>89.0</td>
+   <td>98.5</td>
+   <td>96.4</td>
+   <td>100</td>
+ </tr>
+  <tr>
+    <td>ModFlow (JT-3D)</td>
+    <td>89.0</td>
+   <td>98.5</td>
+   <td>96.4</td>
+   <td>100</td>
  </tr>
 </table>
 
 
-
-| Method | Validity $$\%$$ | Uniqueness $$\%$$ | Novelty $$\%$$ | Reconstruction $$\%$$ |
-| ---------- | ------------- | -------- | ---------| ---------|
+| First Header  | Second Header |
+| ------------- | ------------- |
+| Content Cell  | Content Cell  |
+| Content Cell  | Content Cell  |
 
 # References
 
