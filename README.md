@@ -123,7 +123,7 @@ Some of the generated molecules via $$\texttt{ModFlow}$$ are also shown above. W
 
 
 ## Ablation Studies
-We performed ablation experiments to gain further insights about \texttt{ModFlow}. Specifically, we conducted ablation study to quantify the effect of incorporating the symmetries in our model as **E(3) Equivariant vs Not Equivariant**, where we compare the results to a 3-layer GCN and investigated whether including 3D coordinate information improves the model as **2D vs 3D**. 
+We performed ablation experiments to gain further insights about \texttt{ModFlow}. Specifically, we conducted ablation study to quantify the effect of incorporating the symmetries in our model as **E(3) Equivariant vs Not Equivariant**, where we compare the results to a 3-layer GCN and investigated whether including 3D coordinate information **2D vs 3D**, improves the model and evaluate the benefit of including the geometric information. 
 <p align="center">
   <img src="https://raw.githubusercontent.com/yogeshverma1998/Modular-Flows-Differential-Molecular-Generation/main/ablation_final_combined.png" />
 </p>
