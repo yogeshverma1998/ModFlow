@@ -84,7 +84,9 @@ We generate novel molecules by sampling an initial state $$\mathbf{z}(0) \sim \m
 </p>
 
 # Results
+## Density Estimation
 
+We demonstrated the power of our method on learning highly discontinous patterns on 2D grid graphs. 
 <p align="center">
   <img src="https://raw.githubusercontent.com/yogeshverma1998/Modular-Flows-Differential-Molecular-Generation/main/toy_final.png" />
 </p>
@@ -99,17 +101,26 @@ We trained the model on QM9[8] and ZINC250K[9] dataset, where molecules are in k
 - **Reconstruction**: Fraction of molecules that can be reconstructed from their encoding
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/yogeshverma1998/Modular-Flows-Differential-Molecular-Generation/main/result_combined.png" />
+  <img src="https://raw.githubusercontent.com/yogeshverma1998/Modular-Flows-Differential-Molecular-Generation/main/result_gen_combined.png" />
 </p>
 
-We visually evaluate the generated structures via out method via properties distribution. We utilize kernel density estimation of these distributions to visualize these distributions. We use 
+Some of the generated molecules via $$\texttt{ModFlow}$$ are also shown above. We visually evaluate the generated structures via out method via properties distribution. We utilize kernel density estimation of these distributions to visualize these distributions. We use
+
+- **Molecular Weight**: Sum of the individual atomic weights of a molecule.
+- **LogP**: Ratio of concentration in octanol-phase to aqueous phase, also known as the octanol-water partition coefficient.
+- **Synthetic Accessibility Score (SA)**: Estimate describing the  synthesizability of a given molecule
+- **Quantitative Estimation of Drug-likeness (QED)**: Value describing likeliness of a molecule as a viable candidate for a drug
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/yogeshverma1998/Modular-Flows-Differential-Molecular-Generation/main/prop_dist_combined.png" />
 </p>
 
-## Ablation Studies
 
+
+
+
+## Ablation Studies
+We performed ablation experiments to gain further insights about \texttt{ModFlow}. Specifically, we conducted ablation study to quantify the effect of incorporating the symmetries in our model as **E(3) Equivariant vs Not Equivariant**, where we compare the results to a 3-layer GCN and investigated whether including 3D coordinate information improves the model as **2D vs 3D**. 
 <p align="center">
   <img src="https://raw.githubusercontent.com/yogeshverma1998/Modular-Flows-Differential-Molecular-Generation/main/ablation_final_combined.png" />
 </p>
