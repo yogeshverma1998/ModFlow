@@ -10,6 +10,7 @@ A key challenge of molecular generative models is to be able to generate valid m
 
 # Continuous Normalizing Flows
 
+
 <p align="center">
   <img src="https://github.com/yogeshverma1998/Modular-Flows-Differential-Molecular-Generation/blob/main/nf_website.png" />
 </p>
@@ -97,6 +98,7 @@ $$\texttt{argmax}_\theta \qquad \mathcal{L} = \mathcal{E}_{\hat{p}_{\mathrm{data
 ## Molecule Generation
 
 We generate novel molecules by sampling an initial state $$\mathbf{z}(0) \sim \mathcal{N}(0,I)$$ based on structure, and running the modular flow forward in time until $\mathbf{z}(T)$. This procedure maps a tractable base distribution $$p_0$$ to some more complex distribution $$p_T$$. We follow argmax to pick the most probable label assignment for each node.
+
 <p align="center">
   <img src="https://github.com/yogeshverma1998/Modular-Flows-Differential-Molecular-Generation/blob/main/workflow_final.png" />
 </p>
