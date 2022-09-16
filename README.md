@@ -10,40 +10,16 @@ A key challenge of molecular generative models is to be able to generate valid m
 
 # Continuous Normalizing Flows
 
-
-<p align="center">
-  <img src="https://github.com/yogeshverma1998/Modular-Flows-Differential-Molecular-Generation/blob/main/nf_website.png" />
-</p>
+![title][/Modular-Flows-Differential-Molecular-Generation/nf_website.png]
 
 Normalizing flow have seen widespread use for density modeling, generative modeling, etc which provides a general way of constructing flexible probability distributions. It is defined by a parameterized invertible deterministic transformation from a base distribution $$\mathcal{Z}$$ (e.g., Gaussian distribution) to real-world observational space $$X$$ (e.g. images and speech). When the dynamics of transformation is governed by an ODE, the method is known as Continous Normalizing Flows (CNFs). The process starts by sampling from a base distribution $$\mathbf{z}_0 \sim p_0(\mathbf{z}_0)$$, then solving the IVP $$\mathbf{z}(t_0) = \mathbf{z}_0$$, $$\dot{\mathbf{z}}(t) = \frac{\partial \mathbf{z}(t)}{\partial t} = f(\mathbf{z}(t),t;\theta)$$, where ODE is defined by the parametric function $$f(\mathbf{z}(t),t;\theta)$$ to obtain $$\mathbf{z}(t_1)$$ which constitutes our observable data. Then, using the *instantaneous change of variables* formula change in log-density under this model is given as:
+
 
 <p align="center">
     $$\frac{\partial \log p_t(\mathbf{z}(t))}{\partial t} = -\texttt{tr} \left( \frac{\partial f}{\partial \mathbf{z}(t)} \right)$$
  </p> 
 
 Given a datapoint $$\mathbf{x}$$, we can compute both the point $$\mathbf{z}_{0}$$ which generates $$\mathbf{x}$$, as well as $$\log p_1(\mathbf{x})$$ by solving the initial value problem which integrates the combined dynamics of $$\mathbf{z}(t)$$ and the log-density of the sample resulting in the computation of $$\log p_1(\mathbf{x})$$.
-
-
-
-
-<!--The $$f: \mathcal{Z} \mapsto X$$ is an invertible transformation, then we can compute the density function of real-world data $$\mathbf{x}$$, i.e., $$p_X(\mathbf{x})$$, via the change-of-variables formula:
-
-<p align="center">
-$$p_X(\mathbf{x}) = p_{\mathcal{Z}}\big(f_{\theta}^{-1}(\mathbf{x}) \big) \left| \det \frac{\partial f_{\theta}^{-1}(\mathbf{x})}{\partial \mathbf{x}} \right|$$
- </p>   
-Given a datapoint $$\mathbf{x}$$, the exact density $$p_X(\mathbf{x})$$ can be computed via inverting the flow by function $$f$$, $$\mathbf{z} = f^{-1}(\mathbf{x})$$. Moreover, $$\mathbf{x}$$ can be sampled from $$p_X(\mathbf{x})$$ by first sampling $$\mathbf{z} \sim p_\mathcal{Z}(\mathbf{z})$$ and then performing the feedforward transformation $$\mathbf{x} = f_{\theta}(\mathbf{z})$$. 
-
-
-
-There exists a continous analog of above equation which replaces the  warping function with an integral of continous-time dynamics. The process starts by sampling from a base distribution $$\mathbf{z}_0 \sim p_0(\mathbf{z}_0)$$. Then, we solve the initial value problem $$\mathbf{z}(t_0) = \mathbf{z}_0$$, $$\dot{\mathbf{z}}(t) = \frac{\partial \mathbf{z}(t)}{\partial t} = f(\mathbf{z}(t),t;\theta)$$, where ODE is defined by the parametric function $$f(\mathbf{z}(t),t;\theta)$$ to obtain $$\mathbf{z}(t_1)$$ which constitutes our observable data. These models are called Continous Normalizing Flows (CNF). Then, using the *instantaneous change of variables* formula change in log-density under this model is given as:
-
-<p align="center">
-    $$\frac{\partial \log p_t(\mathbf{z}(t))}{\partial t} = -\texttt{tr} \left( \frac{\partial f}{\partial \mathbf{z}(t)} \right)$$
- </p> 
-
-Given a datapoint $$\mathbf{x}$$, we can compute both the point $$\mathbf{z}_{0}$$ which generates $$\mathbf{x}$$, as well as $$\log p_1(\mathbf{x})$$ by solving the initial value problem which integrates the combined dynamics of $$\mathbf{z}(t)$$ and the log-density of the sample resulting in the computation of $$\log p_1(\mathbf{x})$$.-->
-
-
 
 
 # Modular Flows
@@ -61,7 +37,7 @@ We obtained an alternative representation by decomposing a molecule into a tree 
 <p align="center">
   <img src="https://github.com/yogeshverma1998/Modular-Flows-Differential-Molecular-Generation/blob/main/junction_mod.png" />
 </p>
-
+![title][/Modular-Flows-Differential-Molecular-Generation/junction_mod.png]
 
 ## Differential Modular Flows
 
@@ -91,9 +67,10 @@ We exploit the non-reversible composition of the argmax and softmax to transitio
   <img src="https://github.com/yogeshverma1998/Modular-Flows-Differential-Molecular-Generation/blob/main/tikz_diagram.png" />
 </p>
 We thus maximize an objective over $N$ training graphs, 
-<p align="center">
+
+<!--<p align="center">
 $$\texttt{argmax}_\theta \qquad \mathcal{L} = \mathcal{E}_{\hat{p}_{\mathrm{data}}(\mathbf{z})} \log p_\theta(\mathbf{z}) \approx \frac{1}{N} \sum_{n=1}^N \log p_T\big( \mathbf{z}(T) = \mathbf{z}_n \big)$$     
-</p>   
+</p>-->  
 
 ## Molecule Generation
 
