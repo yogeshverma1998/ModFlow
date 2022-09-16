@@ -90,6 +90,11 @@ We generate novel molecules by sampling an initial state $$\mathbf{z}(0) \sim \m
 </p>
 
 
+## Molecular Experiments
+
+| Method | Validity $$\%$$ | Uniqueness $$\%$$ | Novelty $$\%$$ | Reconstruction $$\%$$ |
+| ---------- | ------------- | -------- | ---------| ---------|
+
 # References
 
 [1]
