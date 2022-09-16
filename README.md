@@ -11,7 +11,7 @@ A key challenge of molecular generative models is to be able to generate valid m
 # Continuous Normalizing Flows
 
 <p align="center">
-  <img src="https://github.com/yogeshverma1998/Modular-Flows-Differential-Molecular-Generation/blob/main/nf_website.png" />
+  <img src="https://raw.githubusercontent.com/yogeshverma1998/Modular-Flows-Differential-Molecular-Generation/main/nf_website.png" />
 </p>
 
 Normalizing flow have seen widespread use for density modeling, generative modeling, etc which provides a general way of constructing flexible probability distributions. It is defined by a parameterized invertible deterministic transformation from a base distribution $$\mathcal{Z}$$ (e.g., Gaussian distribution) to real-world observational space $$X$$ (e.g. images and speech). When the dynamics of transformation is governed by an ODE, the method is known as Continous Normalizing Flows (CNFs). The process starts by sampling from a base distribution $$\mathbf{z}_0 \sim p_0(\mathbf{z}_0)$$, then solving the IVP $$\mathbf{z}(t_0) = \mathbf{z}_0$$, $$\dot{\mathbf{z}}(t) = \frac{\partial \mathbf{z}(t)}{\partial t} = f(\mathbf{z}(t),t;\theta)$$, where ODE is defined by the parametric function $$f(\mathbf{z}(t),t;\theta)$$ to obtain $$\mathbf{z}(t_1)$$ which constitutes our observable data. Then, using the *instantaneous change of variables* formula change in log-density under this model is given as:
