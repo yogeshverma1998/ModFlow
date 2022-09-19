@@ -4,7 +4,7 @@
 
 # Problem of Molecular Generation
 
-A key challenge of molecular generative models is to be able to generate valid molecules, according to various criteria for molecular validity or feasibility. It is a common practice to use external chemical software as rejection oracles to reduce or exclude invalid molecules, or do validity checks as part of autoregressive generation [1,2,3] . An important open question has been whether generative models can learn to achieve high generative validity *intrinsically*, i.e., without being aided by oracles or performing additional checks.
+Generating new molecules is fundamental to advancing critical applications such as drug discovery and material synthesis. A key challenge of molecular generative models is to be able to generate valid molecules, according to various criteria for molecular validity or feasibility. It is a common practice to use external chemical software as rejection oracles to reduce or exclude invalid molecules, or do validity checks as part of autoregressive generation [1,2,3] . An important open question has been whether generative models can learn to achieve high generative validity *intrinsically*, i.e., without being aided by oracles or performing additional checks. We circumvent the issues with novel physics-inspired co-evolving continuous-time flows that induces useful inductive biases for a highly complex combinatorial setting. Our method is inspired by graph PDEs, that repeatedly reconcile locally toward globally aligned densities. 
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/yogeshverma1998/Modular-Flows-Differential-Molecular-Generation/main/mol_gen_intro.png" />
@@ -70,13 +70,13 @@ We reduce the learning problem to maximizing the score cross-entropy $$\mathrm{E
 <p align="center">
 $$\mathbf{z}_n (G_n; \epsilon) = (1-\epsilon)~\mathrm{onehot}(G_n) ~+~ \dfrac{\epsilon}{|\mathcal{A_s}|} \textbf{1}_{M(n)} \textbf{1}_{|\mathcal{A_s}|}^{\top}~,$$
 </p>
-where $$\mathrm{onehot}(G_{n})$$ is a matrix ($$M(n) \times |\mathcal{A_{s}}|$$), such that $$G_{n}(i, k)$$ = 1 if $$v_{i} = a_{k} \in \mathcal{A_{s}}$$, that is if the vertex $$i$$ is labeled with atom $$k$$, and 0 otherwise; $$\textbf{1}_{q}$$ is a vector with $$q$$ entries each set to 1; $$\mathcal{A_{s}} \in \{\mathcal{A}, \mathcal{A}_{\rm tree} \}$$; and $$\epsilon \in [0,1]$$ is added to model the noise in estimating the posterior $$p({\mathbf{z}(T)|G})$$.
+where $$\mathrm{onehot}(G_{n})$$ is a matrix ($$M(n) \times |\mathcal{A_{s}}|$$), such that $$G_{n}(i, k)$$ = 1 if $$v_{i} = a_{k} \in \mathcal{A_{s}}$$, that is if the vertex $$i$$ is labeled with atom $$k$$, and 0 otherwise; $$\textbf{1}_{q}$$ is a vector with $$q$$ entries each set to 1; $$\mathcal{A_{s}} \in \{\mathcal{A}, \mathcal{A}_{\rm tree} \}$$; and $$\epsilon \in [0,1]$$ is added to model the noise in estimating the posterior $$p({\mathbf{z}(T)|G})$$. This is due to short-circuiting the inference process from $$G$$ to $$\mathbf{z}(T)$$ skipping the intermediate dependencies, as shown in the plate diagram. 
 
-This is due to short-circuiting the inference process from $$G$$ to $$\mathbf{z}(T)$$ skipping the intermediate dependencies, as shown in the plate diagram. We exploit the non-reversible composition of the argmax and softmax to transition from continous space to discrete graph space, but short-circuit in reverse direction as shown in the figure below. This indeed allows to keep the forward and backward flows aligned.
 <p align="center">
   <img src="https://raw.githubusercontent.com/yogeshverma1998/Modular-Flows-Differential-Molecular-Generation/main/tikz_diagram.png" />
 </p>
-We thus maximize an objective over $$N$$ training graphs, 
+
+We exploit the non-reversible composition of the argmax and softmax to transition from continous space to discrete graph space, but short-circuit in reverse direction as shown in the figure below. This indeed allows to keep the forward and backward flows aligned. We thus maximize an objective over $$N$$ training graphs, 
 <p align="center">
 $$\texttt{argmax}_\theta \qquad \mathcal{L} = \mathcal{E}_{\hat{p}_{\mathrm{data}}(\mathbf{z})} \log p_\theta(\mathbf{z}) \approx \frac{1}{N} \sum_{n=1}^N \log p_T\big( \mathbf{z}(T) = \mathbf{z}_n \big)$$     
 </p>  
@@ -141,9 +141,9 @@ We performed ablation experiments to gain further insights about **$$\texttt{Mod
 </p>
 
 # Conclusion
-> 1. 
-> 2. 
-> 3. 
+> 1. We propose Physics-inspired co-evolving continuous-time flows, inspired by graph PDEs as $$\texttt{ModFlow}$$, where multiple flows interact locally according to a modular coupled ODE system. 
+> 2. The coupled dynamics results in accurate modeling of graph densities and high quality molecular generation without any validity checks or correction.
+> 3. Interesting avenues open up, including the design of (a) more nuanced mappings between discrete and continuous spaces, and (b) extensions of modular flows to (semi-)supervised settings.
 
 # References
 
