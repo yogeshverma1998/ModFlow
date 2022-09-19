@@ -56,7 +56,7 @@ Based on the general recipie of normalizing flows, we propose to model the node 
 where $$\mathcal{N}_{i} = \{ \mathbf{z}_{j} : (i,j) \in E \}$$ is the set of neighbor scores at time $$t$$, $$\mathbf{x}$$ is the spatial information (2D/3D), and $$\theta$$ are the parameters of the flow function $$f$$ to be learned. By collecting all node differentials we obtain a **modular** joint, coupled ODE, which is equivalent to a graph PDE [5,6], where the evolution of each node only depends on its immediate neighbors. 
 
 <p align="center">
- $$\dot{\mathbf{z}}_{i}(t) = \begin{pmatrix} \dot{\mathbf{z}}_{i}(t)_1(t) \\ \vdots \\ \dot{\mathbf{z}}_{i}(t)_M(t) \end{pmatrix} = \begin{pmatrix} f_\theta\big( t, \mathbf{z}_1(t), \mathbf{z}_{\mathcal{N}_1}(t) \big) \\ \vdots \\ f_\theta\big( t, \mathbf{z}_M(t), \mathbf{z}_{\mathcal{N}_M}(t) \big) \end{pmatrix} $$
+ $$\dot{\mathbf{z}}_{i}(t) = \begin{pmatrix} \dot{\mathbf{z}}_{i}(t)_1(t) \\ \vdots \\ \dot{\mathbf{z}}_{i}(t)_M(t) \end{pmatrix} = \begin{pmatrix} f_\theta\big( t, \mathbf{z}_1(t), \mathbf{z}_{\mathcal{N}_1}(t),\mathbf{x}_{i}, \mathbf{x}_{\mathcal{N}_i} \big) \\ \vdots \\ f_\theta\big( t, \mathbf{z}_M(t), \mathbf{z}_{\mathcal{N}_M}(t),\mathbf{x}_{i}, \mathbf{x}_{\mathcal{N}_i} \big) \end{pmatrix} $$
  </p>
 ## Equivariant local differential
 The goal is to have a function $$f_{\theta}$$ such that it satisfies natural equivariances and invariances of molecules like translation, rotational, reflection equivariances. Therefore, we chose to use E(3)-Equivariant GNN (EGNN)[11] which satisfies all the above criteria.
@@ -70,24 +70,23 @@ We reduce the learning problem to maximizing the score cross-entropy $$\mathrm{E
 <p align="center">
 $$\mathbf{z}_n (G_n; \epsilon) = (1-\epsilon)~\mathrm{onehot}(G_n) ~+~ \dfrac{\epsilon}{|\mathcal{A_s}|} \textbf{1}_{M(n)} \textbf{1}_{|\mathcal{A_s}|}^{\top}~,$$
 </p>
-where 
+where $$\mathrm{onehot}(G_{n})$$ is a matrix ($$M(n) \times |\mathcal{A_{s}}|$$), such that $$G_{n}(i, k)$$ = 1 if $$v_{i} = a_{k} \in \mathcal{A_{s}}$$, that is if the vertex $$i$$ is labeled with atom $$k$$, and 0 otherwise; 
 
-We exploit the non-reversible composition of the argmax and softmax to transition from continous space to discrete graph space, but short-circuit in reverse direction. This indeed allows to keep the forward and backward flows aligned.
+We exploit the non-reversible composition of the argmax and softmax to transition from continous space to discrete graph space, but short-circuit in reverse direction as shown in the figure below. This indeed allows to keep the forward and backward flows aligned.
 <p align="center">
   <img src="https://raw.githubusercontent.com/yogeshverma1998/Modular-Flows-Differential-Molecular-Generation/main/tikz_diagram.png" />
 </p>
 We thus maximize an objective over $$N$$ training graphs, 
-
 <p align="center">
 $$\texttt{argmax}_\theta \qquad \mathcal{L} = \mathcal{E}_{\hat{p}_{\mathrm{data}}(\mathbf{z})} \log p_\theta(\mathbf{z}) \approx \frac{1}{N} \sum_{n=1}^N \log p_T\big( \mathbf{z}(T) = \mathbf{z}_n \big)$$     
 </p>  
 
 ## Molecule Generation
 
-We generate novel molecules by sampling an initial state $$\mathbf{z}(0) \sim \mathcal{N}(0,I)$$ based on structure, and running the modular flow forward in time until $$\mathbf{z}(T)$$. This procedure maps a tractable base distribution $$p_0$$ to some more complex distribution $$p_T$$. We follow argmax to pick the most probable label assignment for each node.
+We generate novel molecules by sampling an initial state $$\mathbf{z}(0) \sim \mathcal{N}(0,I)$$ based on structure, and running the modular flow forward in time until $$\mathbf{z}(T)$$. This procedure maps a tractable base distribution $$p_0$$ to some more complex distribution $$p_T$$. We follow argmax to pick the most probable label assignment for each node as shown below.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/yogeshverma1998/Modular-Flows-Differential-Molecular-Generation/main/workflow_final.png" />
+  <img src="https://raw.githubusercontent.com/yogeshverma1998/Modular-Flows-Differential-Molecular-Generation/main/workflow_final_mod.png" />
 </p>
 
 # Results
@@ -122,9 +121,18 @@ Some of the generated molecules via **$$\texttt{ModFlow}$$** are also shown abov
   <img src="https://raw.githubusercontent.com/yogeshverma1998/Modular-Flows-Differential-Molecular-Generation/main/prop_dist_combined.png" />
 </p>
 
+## Property-targeted Molecular Optimization
+We performed Property-targeted Molecular Optimization, to search for molecules, having a better chemical properties. Specifically, we choose quantitative estimate of drug-likeness (QED) as our target chemical property, which measures the potential of a molecule to be characterized as a drug.  We used a pre-trained ModFlow model $$f$$, to encode a molecule $$\mathcal{M}$$ and get the embedding $$Z = f(\mathcal{M})$$, and further used linear regression to regress these embeddings to the QED scores and interpolated in the latent space space of a molecule along the direction of increasing QED. This is done via gradient ascend method, $$Z' = Z + \lambda*\frac{dy}{dZ}$$ where $y$ is the QED score and  $$\lambda$$ is the length of the search step. The above method is conducted for $K$ steps, and the new embedding $$Z'$$ is decoded back to molecule space via reverse mapping $$\mathcal{M}' = f^{-1}(\mathcal{Z}')$$.
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/yogeshverma1998/Modular-Flows-Differential-Molecular-Generation/main/prop_opt_qm9.png" />
+</p>
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/yogeshverma1998/Modular-Flows-Differential-Molecular-Generation/main/prop_opt_zinc.png" />
+</p>
 
+The above figures represent the molecules decoded from the learned latent space with linear regression for successful molecular optimization.
 
 ## Ablation Studies
 We performed ablation experiments to gain further insights about **$$\texttt{ModFlow}$$**. Specifically, we conducted ablation study to quantify the effect of incorporating the symmetries in our model as **E(3) Equivariant vs Not Equivariant**, where we compare the results to a 3-layer GCN and investigated whether including 3D coordinate information **2D vs 3D**, improves the model and evaluate the benefit of including the geometric information. 
