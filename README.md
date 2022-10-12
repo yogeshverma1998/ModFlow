@@ -86,7 +86,7 @@ $$\texttt{argmax}_\theta \qquad \mathcal{L} = \mathcal{E}_{\hat{p}_{\mathrm{data
 We generate novel molecules by sampling an initial state $$\mathbf{z}(0) \sim \mathcal{N}(0,I)$$ based on structure, and running the modular flow forward in time until $$\mathbf{z}(T)$$. This procedure maps a tractable base distribution $$p_0$$ to some more complex distribution $$p_T$$. We follow argmax to pick the most probable label assignment for each node as shown below.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/yogeshverma1998/Modular-Flows-Differential-Molecular-Generation/main/workflow_final_mod.png" />
+  <img src="https://raw.githubusercontent.com/yogeshverma1998/Modular-Flows-Differential-Molecular-Generation/main/first_page_final_v10.png" />
 </p>
 
 # Results
