@@ -7,7 +7,7 @@
 Generating new molecules is fundamental to advancing critical applications such as drug discovery and material synthesis. A key challenge of molecular generative models is to be able to generate valid molecules, according to various criteria for molecular validity or feasibility. It is a common practice to use external chemical software as rejection oracles to reduce or exclude invalid molecules, or do validity checks as part of autoregressive generation [1,2,3] . An important open question has been whether generative models can learn to achieve high generative validity *intrinsically*, i.e., without being aided by oracles or performing additional checks. We circumvent the issues with novel physics-inspired co-evolving continuous-time flows that induces useful inductive biases for a highly complex combinatorial setting. Our method is inspired by graph PDEs, that repeatedly reconcile locally toward globally aligned densities. 
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/yogeshverma1998/Modular-Flows-Differential-Molecular-Generation/main/mol_gen_intro.png" />
+  <img src="https://raw.githubusercontent.com/yogeshverma1998/ModFlow/main/slide_1_2.png" />
 </p>
 
 
@@ -40,7 +40,7 @@ We represent molecule as a graph $$G = (V,E)$$, where each vertex takes value fr
 We can obtain an alternative representation by decomposing a moleculer graph into a tree, by contracting certain vertices into a single node such that the molecular graph $$G$$ becomes acyclic. We followed a similar decompositon as JT-VAE[4], but restrict these clusters to ring-substructures, in addition to the atom alphabet. Thus, we obtain an extended alphabet vocabulary as $$\mathcal{A}_{\mathrm{tree}} = \{ \texttt{C},\texttt{H},\texttt{N}, \ldots,  \texttt{C}_{1},\texttt{C}_{2},\ldots \}$$, where each cluster label $$\texttt{C}_{r}$$ corresponds to the some ring-substructure in the label vocabulary $$\chi$$
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/yogeshverma1998/Modular-Flows-Differential-Molecular-Generation/main/junction_mod.png" />
+  <img src="https://raw.githubusercontent.com/yogeshverma1998/ModFlow/main/junction_mod.png" />
 </p>
 
 
@@ -56,13 +56,18 @@ Based on the general recipie of normalizing flows, we propose to model the node 
 where $$\mathcal{N}_{i} = \{ \mathbf{z}_{j} : (i,j) \in E \}$$ is the set of neighbor scores at time $$t$$, $$\mathbf{x}$$ is the spatial information (2D/3D), and $$\theta$$ are the parameters of the flow function $$f$$ to be learned. By collecting all node differentials we obtain a **modular** joint, coupled ODE, which is equivalent to a graph PDE [9,10], where the evolution of each node only depends on its immediate neighbors. 
 
 <p align="center">
+  <img src="https://raw.githubusercontent.com/yogeshverma1998/ModFlow/main/slide_3_1.png" />
+</p>
+
+
+<p align="center">
  $$\dot{\mathbf{z}}_{i}(t) = \begin{pmatrix} \dot{\mathbf{z}}_{i}(t)_1(t) \\ \vdots \\ \dot{\mathbf{z}}_{i}(t)_M(t) \end{pmatrix} = \begin{pmatrix} f_\theta\big( t, \mathbf{z}_1(t), \mathbf{z}_{\mathcal{N}_1}(t),\mathbf{x}_{i}, \mathbf{x}_{\mathcal{N}_i} \big) \\ \vdots \\ f_\theta\big( t, \mathbf{z}_M(t), \mathbf{z}_{\mathcal{N}_M}(t),\mathbf{x}_{i}, \mathbf{x}_{\mathcal{N}_i} \big) \end{pmatrix} $$
  </p>
 ## Equivariant local differential
 The goal is to have a function $$f_{\theta}$$ such that it satisfies natural equivariances and invariances of molecules like translation, rotational, reflection equivariances. Therefore, we chose to use E(3)-Equivariant GNN (EGNN)[11] which satisfies all the above criteria.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/yogeshverma1998/Modular-Flows-Differential-Molecular-Generation/main/mol_sym.png" />
+  <img src="https://raw.githubusercontent.com/yogeshverma1998/ModFlow/main/mol_sym.png" />
 </p> 
 ## Training Objective
 
@@ -73,7 +78,7 @@ $$\mathbf{z}_n (G_n; \epsilon) = (1-\epsilon)~\mathrm{onehot}(G_n) ~+~ \dfrac{\e
 where $$\mathrm{onehot}(G_{n})$$ is a matrix ($$M(n) \times |\mathcal{A_{s}}|$$), such that $$G_{n}(i, k)$$ = 1 if $$v_{i} = a_{k} \in \mathcal{A_{s}}$$, that is if the vertex $$i$$ is labeled with atom $$k$$, and 0 otherwise; $$\textbf{1}_{q}$$ is a vector with $$q$$ entries each set to 1; $$\mathcal{A_{s}} \in \{\mathcal{A}, \mathcal{A}_{\rm tree} \}$$; and $$\epsilon \in [0,1]$$ is added to model the noise in estimating the posterior $$p({\mathbf{z}(T)|G})$$. This is due to short-circuiting the inference process from $$G$$ to $$\mathbf{z}(T)$$ skipping the intermediate dependencies, as shown in the plate diagram. 
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/yogeshverma1998/Modular-Flows-Differential-Molecular-Generation/main/tikz_diagram.png" />
+  <img src="https://raw.githubusercontent.com/yogeshverma1998/ModFlow/main/tikz_diagram.png" />
 </p>
 
 We exploit the non-reversible composition of the argmax and softmax to transition from continous space to discrete graph space, but short-circuit in reverse direction as shown in the figure below. This indeed allows to keep the forward and backward flows aligned. We thus maximize an objective over $$N$$ training graphs, 
@@ -86,7 +91,7 @@ $$\texttt{argmax}_\theta \qquad \mathcal{L} = \mathcal{E}_{\hat{p}_{\mathrm{data
 We generate novel molecules by sampling an initial state $$\mathbf{z}(0) \sim \mathcal{N}(0,I)$$ based on structure, and running the modular flow forward in time until $$\mathbf{z}(T)$$. This procedure maps a tractable base distribution $$p_0$$ to some more complex distribution $$p_T$$. We follow argmax to pick the most probable label assignment for each node as shown below.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/yogeshverma1998/Modular-Flows-Differential-Molecular-Generation/main/first_page_final_v10.png" />
+  <img src="https://raw.githubusercontent.com/yogeshverma1998/ModFlow/main/first_page_final_v9.png" />
 </p>
 
 # Results
@@ -94,7 +99,7 @@ We generate novel molecules by sampling an initial state $$\mathbf{z}(0) \sim \m
 
 We demonstrated the power of our method on learning highly discontinous patterns on 2D grid graphs. We considered patterns corresponding to two-variants of chess-board pattern as $$4 \times 4$$, where every node has opposite value to its neighbors and $$16 \times 16$$ grid where blocks of $$4 \times 4$$ nodes have uniform values, but opposite across blocks. At last, we also considered alternate stripes pattern over $$20 \times 20$$ grid.
 <p align="center">
-  <img src="https://raw.githubusercontent.com/yogeshverma1998/Modular-Flows-Differential-Molecular-Generation/main/toy_final.png" width="600" height="300" />
+  <img src="https://raw.githubusercontent.com/yogeshverma1998/ModFlow/main/toy_final.png" width="600" height="300" />
 </p>
 
 
@@ -107,7 +112,16 @@ We trained the model on QM9[6] and ZINC250K[5] dataset, where molecules are in k
 - **Reconstruction**: Fraction of molecules that can be reconstructed from their encoding
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/yogeshverma1998/Modular-Flows-Differential-Molecular-Generation/main/result_gen_combined.png" />
+  <img src="https://raw.githubusercontent.com/yogeshverma1998/ModFlow/main/slide_6_1.png" />
+</p>
+Apart from these metrics, we also evaluated our method on MOSES metrics. These are:
+
+-
+-
+-
+- 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/yogeshverma1998/ModFlow/main/slide_6_2.png" />
 </p>
 
 Some of the generated molecules via **$$\texttt{ModFlow}$$** are also shown above. We visually evaluate the generated structures via out method via properties distribution. We utilize kernel density estimation of these distributions to visualize these distributions. We use
@@ -118,18 +132,18 @@ Some of the generated molecules via **$$\texttt{ModFlow}$$** are also shown abov
 - **Quantitative Estimation of Drug-likeness (QED)**: Value describing likeliness of a molecule as a viable candidate for a drug
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/yogeshverma1998/Modular-Flows-Differential-Molecular-Generation/main/prop_dist_combined.png" />
+  <img src="https://raw.githubusercontent.com/yogeshverma1998/ModFlow/main/prop_dist_combined.png" />
 </p>
 
 ## Property-targeted Molecular Optimization
 We performed Property-targeted Molecular Optimization, to search for molecules, having a better chemical properties. Specifically, we choose quantitative estimate of drug-likeness (QED) as our target chemical property, which measures the potential of a molecule to be characterized as a drug.  We used a pre-trained ModFlow model $$f$$, to encode a molecule $$\mathcal{M}$$ and get the embedding $$Z = f(\mathcal{M})$$, and further used linear regression to regress these embeddings to the QED scores and interpolated in the latent space space of a molecule along the direction of increasing QED. This is done via gradient ascend method, $$Z' = Z + \lambda*\frac{dy}{dZ}$$ where $$y$$ is the QED score and  $$\lambda$$ is the length of the search step. The above method is conducted for $$K$$ steps, and the new embedding $$Z'$$ is decoded back to molecule space via reverse mapping $$\mathcal{M}' = f^{-1}(\mathcal{Z}')$$.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/yogeshverma1998/Modular-Flows-Differential-Molecular-Generation/main/prop_opt_qm9.png" />
+  <img src="https://raw.githubusercontent.com/yogeshverma1998/ModFlow/main/prop_opt_qm9.png" />
 </p>
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/yogeshverma1998/Modular-Flows-Differential-Molecular-Generation/main/prop_opt_zinc.png" />
+  <img src="https://raw.githubusercontent.com/yogeshverma1998/ModFlow/main/prop_opt_zinc.png" />
 </p>
 
 The above figures represent the molecules decoded from the learned latent space with linear regression for successful molecular optimization.
@@ -137,7 +151,7 @@ The above figures represent the molecules decoded from the learned latent space 
 ## Ablation Studies
 We performed ablation experiments to gain further insights about **$$\texttt{ModFlow}$$**. Specifically, we conducted ablation study to quantify the effect of incorporating the symmetries in our model as **E(3) Equivariant vs Not Equivariant**, where we compare the results to a 3-layer GCN and investigated whether including 3D coordinate information **2D vs 3D**, improves the model and evaluate the benefit of including the geometric information. 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/yogeshverma1998/Modular-Flows-Differential-Molecular-Generation/main/ablation_final_combined.png" />
+  <img src="https://raw.githubusercontent.com/yogeshverma1998/ModFlow/main/ablation_final_combined.png" />
 </p>
 
 # Conclusion
