@@ -53,13 +53,13 @@ Based on the general recipie of normalizing flows, we propose to model the node 
     $$\dot{\mathbf{z}}_{i}(t) := \frac{\partial \mathbf{z}_i(t)}{\partial t} = f_\theta\big( t, \mathbf{z}_i(t), \mathbf{z}_{\mathcal{N}_i}(t),\mathbf{x}_{i}, \mathbf{x}_{\mathcal{N}_i} \big), \qquad i = 1, \ldots, M$$
   </p> 
   
-where $$\mathcal{N}_{i} = \{ \mathbf{z}_{j} : (i,j) \in E \}$$ is the set of neighbor scores at time $$t$$, $$\mathbf{x}$$ is the spatial information (2D/3D), and $$\theta$$ are the parameters of the flow function $$f$$ to be learned. By collecting all node differentials we obtain a **modular** joint, coupled ODE, which is equivalent to a graph PDE [9,10], where the evolution of each node only depends on its immediate neighbors. 
+where $$\mathcal{N}_{i} = \{ \mathbf{z}_{j} : (i,j) \in E \}$$ is the set of neighbor scores at time $$t$$, $$\mathbf{x}$$ is the spatial information (2D/3D), and $$\theta$$ are the parameters of the flow function $$f$$ to be learned. 
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/yogeshverma1998/ModFlow/main/slide_3_1.png" />
+  <img src="https://raw.githubusercontent.com/yogeshverma1998/ModFlow/main/slide_3_1.png" width="300" height="200" />
 </p>
 
-
+By collecting all node differentials we obtain a **modular** joint, coupled ODE, which is equivalent to a graph PDE [9,10], where the evolution of each node only depends on its immediate neighbors. 
 <p align="center">
  $$\dot{\mathbf{z}}_{i}(t) = \begin{pmatrix} \dot{\mathbf{z}}_{i}(t)_1(t) \\ \vdots \\ \dot{\mathbf{z}}_{i}(t)_M(t) \end{pmatrix} = \begin{pmatrix} f_\theta\big( t, \mathbf{z}_1(t), \mathbf{z}_{\mathcal{N}_1}(t),\mathbf{x}_{i}, \mathbf{x}_{\mathcal{N}_i} \big) \\ \vdots \\ f_\theta\big( t, \mathbf{z}_M(t), \mathbf{z}_{\mathcal{N}_M}(t),\mathbf{x}_{i}, \mathbf{x}_{\mathcal{N}_i} \big) \end{pmatrix} $$
  </p>
