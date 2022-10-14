@@ -38,7 +38,7 @@ We represent molecule as a graph $$G = (V,E)$$, where each vertex takes value fr
 </p> 
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/yogeshverma1998/ModFlow/main/slide_2_1.png" />
+  <img src="https://raw.githubusercontent.com/yogeshverma1998/ModFlow/main/slide_2_1.png" width="700" height="400" />
 </p>
 
 We can obtain an alternative representation by decomposing a moleculer graph into a tree, by contracting certain vertices into a single node such that the molecular graph $$G$$ becomes acyclic. We followed a similar decompositon as JT-VAE[4], but restrict these clusters to ring-substructures, in addition to the atom alphabet. Thus, we obtain an extended alphabet vocabulary as $$\mathcal{A}_{\mathrm{tree}} = \{ \texttt{C},\texttt{H},\texttt{N}, \ldots,  \texttt{C}_{1},\texttt{C}_{2},\ldots \}$$, where each cluster label $$\texttt{C}_{r}$$ corresponds to the some ring-substructure in the label vocabulary $$\chi$$
@@ -60,7 +60,7 @@ Based on the general recipie of normalizing flows, we propose to model the node 
 where $$\mathcal{N}_{i} = \{ \mathbf{z}_{j} : (i,j) \in E \}$$ is the set of neighbor scores at time $$t$$, $$\mathbf{x}$$ is the spatial information (2D/3D), and $$\theta$$ are the parameters of the flow function $$f$$ to be learned. 
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/yogeshverma1998/ModFlow/main/slide_3_1.png" width="300" height="200" />
+  <img src="https://raw.githubusercontent.com/yogeshverma1998/ModFlow/main/slide_3_1.png" width="500" height="400" />
 </p>
 
 By collecting all node differentials we obtain a **modular** joint, coupled ODE, which is equivalent to a graph PDE [9,10], where the evolution of each node only depends on its immediate neighbors. 
