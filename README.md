@@ -37,6 +37,10 @@ We represent molecule as a graph $$G = (V,E)$$, where each vertex takes value fr
     $$p(G) := p(V | E,\{ z\}) = \prod_{i=1}^M \texttt{Cat}(v_i | \sigma(\mathbf{z}_i))$$
 </p> 
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/yogeshverma1998/ModFlow/main/slide_2_1.png" />
+</p>
+
 We can obtain an alternative representation by decomposing a moleculer graph into a tree, by contracting certain vertices into a single node such that the molecular graph $$G$$ becomes acyclic. We followed a similar decompositon as JT-VAE[4], but restrict these clusters to ring-substructures, in addition to the atom alphabet. Thus, we obtain an extended alphabet vocabulary as $$\mathcal{A}_{\mathrm{tree}} = \{ \texttt{C},\texttt{H},\texttt{N}, \ldots,  \texttt{C}_{1},\texttt{C}_{2},\ldots \}$$, where each cluster label $$\texttt{C}_{r}$$ corresponds to the some ring-substructure in the label vocabulary $$\chi$$
 
 <p align="center">
@@ -116,10 +120,11 @@ We trained the model on QM9[6] and ZINC250K[5] dataset, where molecules are in k
 </p>
 Apart from these metrics, we also evaluated our method on MOSES metrics. These are:
 
--
--
--
-- 
+- **FCD**: measures diversity and chemical and biological property alignment
+- **SNN**: quantifies closeness of generated molecules to true molecule manifold
+- **Frag**: measures distance between the fragment frequencies  generated and reference
+- **IntDiv**: diversity by computing pairwise similarity of the generated molecules
+
 <p align="center">
   <img src="https://raw.githubusercontent.com/yogeshverma1998/ModFlow/main/slide_6_2.png" />
 </p>
