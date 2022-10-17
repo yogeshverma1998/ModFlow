@@ -76,6 +76,11 @@ The goal is to have a function $$f_{\theta}$$ such that it satisfies natural equ
 ## Training Objective
 
 We reduce the learning problem to maximizing the score cross-entropy $$\mathrm{E}_{\hat{p}_{\mathrm{data}}(\mathbf{z}(T))}[\log p_\theta(\mathbf{z}(T))]$$, where we turn the observed set of graphs $$\{G_{n}\}$$ into a set of scores $$\{\mathbf{z}_{n}\}$$ by using one-hot encoding 
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/yogeshverma1998/ModFlow/main/kl_2.png" />
+</p>
+
 <p align="center">
 $$\mathbf{z}_n (G_n; \epsilon) = (1-\epsilon)~\mathrm{onehot}(G_n) ~+~ \dfrac{\epsilon}{|\mathcal{A_s}|} \textbf{1}_{M(n)} \textbf{1}_{|\mathcal{A_s}|}^{\top}~,$$
 </p>
