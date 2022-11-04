@@ -2,6 +2,22 @@
 
 > **TL;DR:** We propose generative graph normalizing flow models, based on a system of coupled node ODEs, that repeatedly reconcile locally toward globally aligned densities for high quality molecular generation
 
+Please cite our work if you find it useful:
+
+```
+@misc{https://doi.org/10.48550/arxiv.2210.06032,
+  doi = {10.48550/ARXIV.2210.06032},
+  url = {https://arxiv.org/abs/2210.06032},
+  author = {Verma, Yogesh and Kaski, Samuel and Heinonen, Markus and Garg, Vikas},
+  keywords = {Machine Learning (cs.LG), Emerging Technologies (cs.ET), Biomolecules (q-bio.BM), Machine Learning (stat.ML), FOS: Computer and information sciences, FOS: Computer and information sciences, FOS: Biological sciences, FOS: Biological sciences},
+  title = {Modular Flows: Differential Molecular Generation},
+  publisher = {arXiv},
+  year = {2022},
+  copyright = {Creative Commons Attribution 4.0 International}
+}
+
+```
+
 # Problem of Molecular Generation
 
 Generating new molecules is fundamental to advancing critical applications such as drug discovery and material synthesis. A key challenge of molecular generative models is to be able to generate valid molecules, according to various criteria for molecular validity or feasibility. It is a common practice to use external chemical software as rejection oracles to reduce or exclude invalid molecules, or do validity checks as part of autoregressive generation [1,2,3] . An important open question has been whether generative models can learn to achieve high generative validity *intrinsically*, i.e., without being aided by oracles or performing additional checks. We circumvent the issues with novel physics-inspired co-evolving continuous-time flows that induces useful inductive biases for a highly complex combinatorial setting. Our method is inspired by graph PDEs, that repeatedly reconcile locally toward globally aligned densities. 
